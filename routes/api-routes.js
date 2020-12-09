@@ -1,6 +1,7 @@
 const db = require("../models");
 
 module.exports = function (app) {
+  // route for all exercise
   app.get("/api/workouts", (req, res) => {
     db.Workout.find({})
       .populate("exercises")
@@ -12,6 +13,7 @@ module.exports = function (app) {
       });
   });
 
+  // all workout data for stats page
   app.get("/api/workouts/range", (req, res) => {
     db.Workout.find()
       .then((dbWorkout) => {
@@ -22,6 +24,7 @@ module.exports = function (app) {
       });
   });
 
+  // workout post route
   app.post("/api/workouts", ({ body }, res) => {
     db.Workout.create(body)
       .then((dbWorkout) => {
@@ -32,6 +35,7 @@ module.exports = function (app) {
       });
   });
 
+  // updates workout with new exercise
   app.put("/api/workouts/:id", (req, res) => {
     db.Workout.findOneAndUpdate(
       { _id: req.params.id },

@@ -13,9 +13,11 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
+// requiring routes
 require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
 
+// allows mongoose to use atlas or local database
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
